@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .error {color: red; font-weight: bold;}
+    </style>
+</head>
+<body>
+
+    <h1>TES FETCH API KE DOM</h1>
+
+    <button onclick="loadData()">Muat user data</button>
+    
+    <div id="app"></div>
+    
+    <script>
+        async function loadData() {
+            const container = document.querySelector('#app')
+            
+            container.innerHTML = `<p>Sedang mengambil data</p>`
+            
+            try {
+                const res = await fetch('https://jsonplaceholder.typicode.com/users')
+                const data = await res.json()
+
+                container.innerHTML = data.map(item => `<div>${item.name} - ${item.email} </div>`).join('');
+            } catch (error) {
+                container.innerHTML = `<p class='error'>GAGAL MEMUAT DATA: ${error.message}</p>`;               
+            }
+
+        }
+
+    </script>
+</body>
+</html> 
