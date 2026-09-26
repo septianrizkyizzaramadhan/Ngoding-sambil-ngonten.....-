@@ -1,0 +1,55 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>tantangan1</title>
+    </head>
+    <body>
+
+        <h1 style="color: purple; font-family: Arial;">TANTANGAN PERTAMA</h1>
+
+        <div id="container">
+            <input id="input-search" type="text" placeholder="cari judul postingan..."/>
+            <button id="button-search">cari</button>
+        </div>
+
+        <div id="app"></div>
+
+        <script>
+            const container = document.querySelector('#container')
+            const input = document.querySelector('#input-search')
+            const button = document.querySelector('#button-search')
+            const app = document.querySelector('#app')
+
+            async function getPostingan() {
+                const keyword = input.value;
+
+                app.innerHTML = `<p>mencari data....</P>`
+
+                try {
+                    const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+                    const data = await res.json()
+
+                    const filterData = data.filter(item => item.title.toLowerCase().includes(keyword.toLowerCase())).slice(0, 5)
+                    if (filterData.length === 0) {
+                        app.innerHTML = `<p style="color: red;">Error ${keyword} tidak ditemukan</p>`
+                        return;
+                    }
+
+                    app.innerHTML = filterData.map(({title, body}) => `
+                        <div>
+                            <h3 style="margin-top: 0 color: #333;">${title}</h3>
+                            <p style="color #555;">body: ${body}</p>
+                        </di>`
+                    ).join('')
+                } catch(error) {
+                    app.innerHTML = `<p style="color: red;">terjadi kesalahan ${error.message}</p>`
+                }
+            }
+
+            button.addEventListener('click', getPostingan)
+
+        </script>
+    </body>
+    </html>

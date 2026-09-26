@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <h2>User Direktory Search</h2>
+    <form id="searchForm">
+        <input type="text" id="searchInput" placeholder="Cari nama username..." />
+        <button type="submit">Cari</button>
+    </form>
+
+    <div id="app"></div>
+
+    <script>
+
+            const form = document.querySelector('#searchForm');
+            const input = document.querySelector('#searchInput');
+            const container = document.querySelector('#app')
+
+            async function searchUser() {
+                container.innerHTML = `<p> sedang mencari data...</p>`
+            
+                try {
+                    const res = await fetch('https://jsonplaceholder.typicode.com/users')
+                    const data = await res.json();  
+                }
+            }
+
+    </script>
+    
+</body>
+</html>

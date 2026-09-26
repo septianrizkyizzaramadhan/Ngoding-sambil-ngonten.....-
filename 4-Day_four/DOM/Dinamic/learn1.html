@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 - DOM & Fetch API</title>
+</head>
+<body>
+
+    <div id="control-selection">
+        <input type="text" id="input-search" placeholder="cari sesuatu..." />
+        <button id="button-search">Cari</button>
+    </div>
+
+    <div id="app"></div>
+    <div id="result-container"></div>
+    
+    <script>
+        const div = document.querySelector('#control-selection')
+        const input = document.querySelector('#input-search')
+        const button = document.querySelector('#button-search')
+        const main = document.querySelector('#app')
+        const container = document.querySelector('#result-container')
+
+        // 1. Fungsi async utama
+        async function getData() {
+            const kataKunci = input.value;
+
+            container.innerHTML = `<p>Mencari data...</p>`;
+
+            // 2. try...catch DITARUH DI DALAM FUNGSI
+            try {
+                const res = await fetch('https://jsonplaceholder.typicode.com/users');
+                const data = await res.json();
+
+                const hasilFilter = data.filter(user => 
+                    user.name.toLowerCase().includes(kataKunci.toLowerCase())
+                );
+
+                // 3. DIBETULKAN: .length (bukan .lenght)
+                if (hasilFilter.length === 0) {
+                    container.innerHTML = `<p style="color: red;">User "${kataKunci}" tidak ditemukan</p>`;
+                    return;
+                }
+
+                // 4. DIBETULKAN: company.name & tebal border (1px biar gak kegedean)
+                container.innerHTML = hasilFilter.map(({ name, email, company }) => `
+                    <div style="border: 1px solid #ccc; padding: 10px; margin-top: 10px; border-radius: 8px;">
+                        <h3>${name}</h3>
+                        <p>📧 Email: ${email}</p>
+                        <p>🏢 Company: ${company.name}</p>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                container.innerHTML = `<p style="color: red;">Gagal memuat data: ${error.message}</p>`;
+            }
+        }
+
+        // 5. DIBETULKAN: panggil nama fungsi yang sama (getData)
+        button.addEventListener('click', getData);
+    </script>
+</body>
+</html>

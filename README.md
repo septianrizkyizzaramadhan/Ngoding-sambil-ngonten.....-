@@ -35,3 +35,11 @@ Di hari kegita gw lajut belajar 3 materi yaitu:
  - Fetch API (fetch())
  - Error Handling (try ... catch)
 Gw belajar cara memanggil API
+
+### DAY FOUR BELAJAR JS 
+Di hari ke empat ini GW BELAJAR cara mengolah API ke DOM dan membangun fitur percarian.
+Pertama gw belajar 'Manipulasi DOM dan Event Dasar' seperti: 
+`document.querySelector()`
+`innerHTML`
+`addEventListener('click', ...)`
+yap gw baru belajar basic nya dulu buat penguatan selebihnya bakal gw pelajari di tahap berikutnya.

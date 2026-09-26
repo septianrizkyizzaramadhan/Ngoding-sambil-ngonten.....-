@@ -1,0 +1,7 @@
+istilah istilah penting DOM (Dokument Object Model)
+
+1. document
+2. querySelector / getElementById
+3. innerHTML
+4. addEventListener 
+5. e.preventDefault()
