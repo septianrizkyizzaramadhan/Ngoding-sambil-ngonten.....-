@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+</head>
+<body>
+    
+    <h2>Notes Favorite Name</h2>
+
+    <div class="box">
+        <input type="text" id="inputName" placeholder="ketik nama disini..."/>
+        <button onclick="simpanData()">simpan</button>
+    </div>
+
+    <ul id="daftarNama"></ul>
+    
+
+    <script>
+        //Wadah Awal & Muat Data Lama
+        let dataSimpanan = []
+        const dataLama = localStorage.getItem('catatan_nama');
+
+        if (dataLama) {
+            dataSimpanan = JSON.parse(dataLama)
+            
+            tampilkanKeLayar()
+        }
+
+        function simpanData() {
+            const inputan = document.getElementById('inputName');
+            const namaBaru = inputan.value;
+
+            if (namaBaru === '') {
+                alert('Nama tidak boleh kosong')
+                return;
+            }
+
+            dataSimpanan.push(namaBaru) ;
+
+            localStorage.setItem('catatan_nama', JSON.stringify(dataSimpanan))
+            inputan.value = ''
+            tampilkanKeLayar()
+        }
+
+        function tampilkanKeLayar() {
+            const ul = document.getElementById('daftarNama');
+            ul.innerHTML = ''
+            dataSimpanan.forEach((nama, index) => {
+                ul.innerHTML  += `<li>${nama} <button onclick="hapusData(${index})">hapus</button></li>`;
+            });
+        }
+
+        function hapusData(indexItem) {
+            dataSimpanan.splice(indexItem, 1)
+            localStorage.setItem('catatan_nama', JSON.stringify(dataSimpanan));
+            tampilkanKeLayar()
+        }
+
+
+    </script>
+</body>
+</html>
