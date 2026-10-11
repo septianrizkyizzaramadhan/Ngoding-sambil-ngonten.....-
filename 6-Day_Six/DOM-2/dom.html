@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <h2>Aplikasi to-do-list</h2>
+    <input type="text" id="taskInput" placeholder="Tulis kegiatan...">
+    <button id="addBTN">Tambah kegiatan</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        const taskInput = document.getElementById('taskInput')
+        const addBTN = document.getElementById('addBTN')
+        const taskList = document.getElementById('taskList')
+
+        addBTN.addEventListener('click', function(){
+            const taskText = taskInput.value.trim();
+
+            if (taskText === '') {
+                alert('Kegiatan tidak boleh kosong!')
+                return;                                                                                             
+            }
+
+            const li = document.createElement('li')
+            li.textContent = taskText;
+
+            li.addEventListener('click', function(){
+                li.classList.toggle('completed')    
+            })
+
+            const deleteBTN = document.createElement('button')
+            deleteBTN.textContent = ' Hapus'
+            deleteBTN.style.margin = '10px'
+
+            deleteBTN.addEventListener('click', function(e) {
+                e.stopPropagation()
+                li.remove()
+            })
+            
+            li.appendChild(deleteBTN)
+            taskList.appendChild(li)
+
+            taskInput.value = '';
+        })
+    </script>
+</body>
+</html>

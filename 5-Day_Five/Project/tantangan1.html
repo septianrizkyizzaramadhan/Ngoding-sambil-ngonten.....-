@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tantangan1</title>
+</head>
+<body>
+
+    <div>
+        <textarea style="color: red " id="komentar"></textarea>
+        <button onclick="tambahKomen()">simpan</button>
+    </div>
+    
+    <ul id="daftarKomen"></ul>
+
+    <script>
+        let komen = []
+
+        const dataLama = localStorage.getItem('komentar')
+        if (dataLama) {
+            komen = JSON.parse(dataLama)
+            tampilkanKomen();
+        }
+
+        function tambahKomen() {
+            const inputan = document.getElementById('komentar')
+            const coment = inputan.value;
+
+            komen.push(coment)
+
+
+            localStorage.setItem('komentar', JSON.stringify(komen))
+            inputan.value = ''
+            tampilkanKomen()
+        }
+
+        function tampilkanKomen() {
+            const ul = document.getElementById('daftarKomen');
+            ul.innerHTML = ''
+            komen.forEach((nama, index) => {
+                ul.innerHTML  += `<li>${nama} <button onclick="hapusData(${index})">hapus</button></li>`;
+            });
+        }
+
+            function hapusData(indexItem) {
+            komen.splice(indexItem, 1)
+            localStorage.setItem('komentar', JSON.stringify(komen));
+            tampilkanKomen()
+        }
+    </script>
+</body>
+</html>

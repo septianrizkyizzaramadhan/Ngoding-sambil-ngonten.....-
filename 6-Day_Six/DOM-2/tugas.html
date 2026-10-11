@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tugas Ringan DOM</title>
+    <style>
+        #kotak {
+            width: 200px;
+            height: 200px;
+            background-color: lightgray;
+            margin-bottom: 10px;
+        }
+        .ubah-warna {
+            background-color: salmon; /* Warna saat class aktif */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Kotak -->
+    <div id="kotak"></div>
+    <button id="btnWarna">Ganti Warna</button>
+
+    <br><br>
+
+    <!-- 2. Input Nama -->
+    <input type="text" id="inputNama" placeholder="Masukkan namamu...">
+    <button id="btnSapa">Sapa</button>
+    <p id="teksSapa"></p>
+
+    <script>
+        const kotak = document.getElementById('kotak')
+        const warna = document.getElementById('btnWarna')
+        const inputNama = document.getElementById('inputNama')
+        const btnSapa = document.getElementById('btnSapa')
+        const teksSapa = document.getElementById('teksSapa')
+
+        warna.addEventListener('click', function() {
+            kotak.classList.toggle('ubah-warna')
+        }) 
+        
+        btnSapa.addEventListener('click', function() {
+            nama = inputNama.value.trim()
+
+            if (nama === '') {
+                alert('Nama tidak boleh kosong')
+                return;
+            }
+            
+            teksSapa.textContent = `Halo. ${nama} salam kenal gw revy`
+
+            inputNama.value = ''
+
+        })
+    </script>
+</body>
+</html>
