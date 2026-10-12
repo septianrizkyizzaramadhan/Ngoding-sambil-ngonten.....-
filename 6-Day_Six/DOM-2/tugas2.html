@@ -22,63 +22,77 @@
     <ul id="noteList"></ul>
 
     <script>
-        const noteInput = document.getElementById('noteInput')
-        const button = document.getElementById('addNoteBtn')
-        const list = document.getElementById('noteList')
+        const noteInput = document.getElementById('noteInput');
+        const button = document.getElementById('addNoteBtn');
+        const list = document.getElementById('noteList');
 
-
-        //localStorage 
-        let simpanCatatan = JSON.parse(localStorage.getItem('daftarCatatan')) || []
+        // 1. Array sekarang menampung objek (teks dan status selesai)
+        let catatans = JSON.parse(localStorage.getItem('daftarCatatan')) || [];
 
         function tampilkanCatatan() {
-            list.innerHTML = ''
+            list.innerHTML = '';
 
-            simpanCatatan.forEach(function(textCatatan){
-                const li = document.createElement('li')
-                li.textContent = textCatatan
+            catatans.forEach(function(itemCatatan, index){
+                const li = document.createElement('li');
+                li.textContent = itemCatatan.teks;
 
-                list.appendChild(li)
-            })
+                // Jika status di data aslinya true, langsung berikan class 'completed'
+                if (itemCatatan.selesai) {
+                    li.classList.add('completed');
+                }
+
+                // Fitur Coret: Klik <li> untuk mengubah status selesai (true/false)
+                li.addEventListener('click', function(){
+                    // Ubah status kebalikannya (kalau false jadi true, kalau true jadi false)
+                    itemCatatan.selesai = !itemCatatan.selesai;
+                    
+                    // Simpan perubahan status ke LocalStorage dan refresh layar
+                    simpanDanRefresh();
+                });
+
+                // Tombol Hapus
+                const deleteNote = document.createElement('button');
+                deleteNote.textContent = 'hapus'; 
+                deleteNote.style.margin = '5px';
+                
+                deleteNote.addEventListener('click', function(e){
+                    e.stopPropagation();
+                    catatans.splice(index, 1);
+                    simpanDanRefresh();
+                });
+            
+                li.appendChild(deleteNote);
+                list.appendChild(li);
+            });
         }
 
+        // Fungsi bantuan untuk simpan dan refresh
+        function simpanDanRefresh() {
+            localStorage.setItem('daftarCatatan', JSON.stringify(catatans));
+            tampilkanCatatan();
+        }
+
+        // 2. Tombol Tambah Catatan Baru
         button.addEventListener('click', function() {
-            noteText = noteInput.value.trim()
+            const noteText = noteInput.value.trim();
 
             if (noteText === '') {
-                alert('catatan tidak boleh kosong!')
+                alert('Catatan tidak boleh kosong!');
                 return;
             }
 
-            const li = document.createElement('li')
-            li.textContent = noteText;
+            // Masukkan data baru sebagai objek lengkap dengan status selesai: false
+            catatans.push({
+                teks: noteText,
+                selesai: false
+            });
 
-            li.addEventListener('click', function(){
-                li.classList.toggle('completed')
-            })
+            simpanDanRefresh();
+            noteInput.value = '';
+        });
 
-            const deleteNote = document.createElement('button')
-                deleteNote.textContent = 'hapus' 
-                deleteNote.style.margin = '5px'
-                
-                deleteNote.addEventListener('click', function(e){
-                    e.stopPropagation()
-                    li.remove()
-                })
-            
-            li.appendChild(deleteNote)
-            list.appendChild(li)
-
-            noteInput.value = ''
-
-        })
-        // Tulis kode JavaScript-mu di sini!
-        // 1. Ambil elemen (noteInput, addNoteBtn, noteList)
-        // 2. Tambahkan event listener 'click' pada tombol
-        // 3. Buat validasi trim() & alert jika kosong
-        // 4. Buat elemen <li>, beri textContent
-        // 5. Tambahkan event listener 'click' untuk toggle coret di <li>
-        // 6. Buat tombol hapus, beri event listener .remove()
-        // 7. Gabungkan semuanya ke noteList dan bersihkan input
+        // Jalankan saat pertama kali halaman dibuka
+        tampilkanCatatan();
     </script>
 </body>
 </html>

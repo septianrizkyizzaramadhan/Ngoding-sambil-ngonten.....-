@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>project</title>
+
+    <style>
+    .completed {
+        text-decoration: line-through;
+        color: rgb(221, 0, 0);
+    }
+    </style>
+</head>
+<body>
+    <h2>Catatan Pengeluaran</h2>
+
+    <input type="text" id="inputName" placeholder="Masukkan nama barang: ">
+    <input type="number" id="inputPrice" placeholder="Masukkan harganya: ">
+    <button id="btn">Add</button>
+
+    <ul id="namaDanHarga"></ul>
+
+    <script>
+        const namaBarang = document.getElementById('inputName')
+        const hargaBarang = document.getElementById('inputPrice')
+        const button = document.getElementById('btn')
+        const produk = document.getElementById('namaDanHarga')
+
+        let pengeluaran = JSON.parse(localStorage.getItem('daftarPengeluaran')) || []
+        
+        function tampilkanPengeluaran() {
+            produk.innerHTML = ''
+
+            pengeluaran.forEach(function(itemPengeluaran, index){
+                const li = document.createElement('li')
+                li.textContent = itemPengeluaran.text
+
+                if (itemPengeluaran.selesai) {
+                    li.classList.add('completed')
+                }
+
+                li.addEventListener('click', function(){
+                    itemPengeluaran.selesai = !itemPengeluaran.selesai
+                    simpanDanRefresh()
+                })
+
+                const hapusPengeluaran = document.createElement('button')
+                hapusPengeluaran.textContent = 'hapus'
+                hapusPengeluaran.style.margin = '10px'
+
+                hapusPengeluaran.addEventListener('click', function(e){
+                    e.stopPropagation()
+                    pengeluaran.splice(index, 1)
+                    simpanDanRefresh()
+                })
+                li.appendChild(hapusPengeluaran)
+                produk.appendChild(li)
+            })
+        }
+
+        function simpanDanRefresh() {
+            localStorage.setItem('daftarPengeluaran', JSON.stringify(pengeluaran))
+            tampilkanPengeluaran()
+        }
+
+        button.addEventListener('click', function() {
+            const nama = namaBarang.value.trim()
+            const harga = hargaBarang.value.trim()
+            
+            if (nama === '' || harga === '') {
+                alert('tidak boleh ada yang kosong')
+                return;
+            }
+
+            const text = `${nama} - Rp${Number(harga).toLocaleString('id-ID')}`
+
+            pengeluaran.push({
+                text: text,
+                selesai: false
+            })
+
+            simpanDanRefresh()
+            nama.value = ''
+            harga.value = ''
+        })
+
+        tampilkanPengeluaran()
+    </script>
+    
+</body>
+</html>
