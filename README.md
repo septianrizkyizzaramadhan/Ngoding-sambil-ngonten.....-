@@ -44,7 +44,7 @@ Pertama gw belajar 'Manipulasi DOM dan Event Dasar' seperti:
 `addEventListener('click', ...)`
 yap gw baru belajar basic nya dulu buat penguatan selebihnya bakal gw pelajari di tahap berikutnya.
 
-# DAY FIVE BELAJAR JS
+### DAY FIVE BELAJAR JS
 
 Di hari kelima ini gw mulai belajar tentang **LocalStorage**, yaitu cara menyimpan data di dalam browser agar data tetap tersedia meskipun halaman web di-refresh atau ditutup.
 
@@ -54,7 +54,7 @@ Hal yang dipelajari:
 - **Konversi Format Data:** Memahami kenapa data harus diubah menjadi string JSON menggunakan `JSON.stringify()` sebelum disimpan, lalu dikembalikan ke bentuk Array of Objects menggunakan `JSON.parse()` saat diambil kembali.
 - **Penerapan pada State:** Menggunakan LocalStorage untuk menyimpan data aplikasi, seperti daftar catatan (*Notes App*) atau daftar pengeluaran (*Expense Tracker*), secara lokal.
 
-# DAY SIX BELAJAR JS
+### DAY SIX BELAJAR JS
 
 Di hari keenam ini gw fokus melakukan penguatan (*reinforcement*) dengan menggabungkan seluruh ilmu yang sudah dipelajari dari Day 1 sampai Day 5 untuk membangun proyek-proyek kecil secara mandiri.
 
