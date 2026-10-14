@@ -1,4 +1,4 @@
-export async function getUsers(jumlah = 222222){
+export async function getUsers(jumlah = 10){
     const res = await fetch(`https://randomuser.me/api/?results=${jumlah}`)
 
     if(!res.ok) {
