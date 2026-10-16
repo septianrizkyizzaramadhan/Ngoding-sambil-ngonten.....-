@@ -62,3 +62,20 @@ Hal yang dipraktikkan:
 
 - **Notes App & Expense Tracker:** Menggabungkan Array of Objects, manipulasi DOM, event listener, Array methods, dan sinkronisasi LocalStorage secara real-time.
 - **Project Integrasi API + DOM + Search:** Membuat aplikasi Random User Profile yang mengambil data dari internet menggunakan `fetch()` dan `async/await`, merendernya ke DOM, melengkapinya dengan error handling (`try...catch...finally`), serta menambahkan fitur pencarian (*filtering*) data langsung di sisi client (*client-side*).
+
+
+### DAY SEVEN BELAJAR JS 
+
+Di hari ke 7 ini aku belajar tentang `import` dan `export`. apa saja yang aku pelajar ? 
+yang pertama gw pelajari itu ada : 
+- 
+- 
+- 
+- 
+- 
+
+### DAY EIGHT BELAJAR JS 
+
+#### WELCOME TO DAY EIGHT 
+HELLLOOOOOOWWWWW hari ke 8 welcome react.js xixixi. 
+hi guys akhirnya gw sampai ke tahap react.js hahaha antara bingung dan senang. di sini gw bakal belajar tentang dasar react terlebih dahulu jadi aku cuman tulis sedikit saja 
